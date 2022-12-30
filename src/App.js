@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 import Confetti from 'react-confetti'
-import { useEffect, useState } from 'react';
+import Dice from './components/Dice';
 
 function App() {
   const [windowSize, setWindowSize] = useState({
@@ -9,9 +10,7 @@ function App() {
   })
 
   const [showConfetti, setShowConfetti] = useState(false)
-  
-
-  
+    
   function handleConfetti(){
     setShowConfetti(prevShow => !prevShow)
   }
@@ -31,7 +30,20 @@ function App() {
   })
 
   return (
-    <div className="App">
+    <div className="app">
+      <h1>Tenzies</h1>
+      <div className='all-dice-container'>
+        <Dice />
+        <Dice />
+        <Dice />
+        <Dice />
+        <Dice />
+        <Dice />
+        <Dice />
+        <Dice />
+        <Dice />
+        <Dice />
+      </div>
       {showConfetti && <Confetti width={windowSize.width} height={windowSize.height} />}
         <button onClick={handleConfetti}>Confetti!!!!</button>
     </div>
