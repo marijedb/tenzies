@@ -1,23 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import Confetti from 'react-confetti'
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  })
+
+  const [showConfetti, setShowConfetti] = useState(false)
+  
+
+  
+  function handleConfetti(){
+    setShowConfetti(prevShow => !prevShow)
+  }
+  
+  useEffect(()=> {
+    function handleWindowSize(){
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+    }
+    window.addEventListener('resize', handleWindowSize)
+
+    return _ => {
+      window.removeEventListener('resize', handleWindowSize)
+    }   
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {showConfetti && <Confetti width={windowSize.width} height={windowSize.height} />}
+        <button onClick={handleConfetti}>Confetti!!!!</button>
     </div>
   );
 }
