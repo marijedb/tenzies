@@ -51,3 +51,8 @@ function App() {
 }
 
 export default App;
+
+// prop to dice, random number
+// loop 10 times to show 10 dice. give each dice the random number as prop
+// display on screen
+// when button clicked new random dice come. 
