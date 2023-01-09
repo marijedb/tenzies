@@ -42,10 +42,36 @@ body {
   cursor: pointer;
 }
 
+@media (max-width: 320px){
+  .all-dice-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 
 @media (min-width: 600px){
   .app {
     max-width: 1000px;
     max-height: 800px;
+  }
+
+  .dice-container {
+    height: 50px;
+    width: 50px;
+  }
+
+  .single-dice {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1000px){
+  .dice-container {
+    height: 80px;
+    width: 80px;
+  }
+
+  .single-dice {
+    font-size: 4rem;
   }
 }
