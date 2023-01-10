@@ -10,13 +10,11 @@ function App() {
     height: window.innerHeight
   })
 
-  const [showConfetti, setShowConfetti] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(true)
     
   const [diceArray, setDiceArray] = useState(allNewDice())
 
-  function handleConfetti(){
-    setShowConfetti(prevShow => !prevShow)
-  }
+  const [tenzies, setTenzies] = useState(false)
   
   useEffect(()=> {
     function handleWindowSize(){
@@ -32,24 +30,49 @@ function App() {
     }   
   })
 
+  useEffect(() => {
+    const allHeld = diceArray.every(dice => dice.isHeld)
+    const firstValue = diceArray[0].value
+    const allSameValue = diceArray.every(dice => dice.value === firstValue)
+    if(allHeld && allSameValue){
+      setTenzies(true)
+    }
+  }, [diceArray])
+
   const diceElements = diceArray.map((dice)=> {
-    return <Dice value={dice.value} key={dice.id} isHeld={dice.isHeld} />
+    return <Dice value={dice.value} key={dice.id} isHeld={dice.isHeld} holdDice={() => holdDice(dice.id)} />
   })
+
+  function generateNewDice(){
+    return { 
+      value: Math.floor(Math.random() * 6) + 1, 
+      isHeld: false,
+      id: nanoid()
+    }
+  }
 
   function allNewDice(){
     let newDiceArray = []
     for(let i = 0; i < 10 ; i++){
-      newDiceArray.push({ 
-        value: Math.floor(Math.random() * 6) + 1, 
-        isHeld: false,
-        id: nanoid()
-      })
+      newDiceArray.push(generateNewDice())
   }
   return newDiceArray
 }
 
   function getNewDice(){
-    setDiceArray(allNewDice())
+    setDiceArray(oldDiceArray => oldDiceArray.map(dice => {
+      return dice.isHeld ? dice : generateNewDice()
+    }))
+  }
+
+  function holdDice(id){
+   setDiceArray(oldDiceArray => oldDiceArray.map(dice => {
+    return dice.id === id ? {
+        ...dice, 
+        isHeld: !dice.isHeld
+      } : 
+      dice
+   }))
   }
 
   return (
@@ -60,8 +83,8 @@ function App() {
         {diceElements}
       </div>
       <button className='roll-btn' onClick={getNewDice}>Roll</button>
-      {showConfetti && <Confetti width={windowSize.width} height={windowSize.height} />}
-        <button onClick={handleConfetti}>Confetti!!!!</button>
+      {(showConfetti && tenzies) && <Confetti width={windowSize.width} height={windowSize.height} />}
+        
     </div>
   );
 }

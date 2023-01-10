@@ -5,7 +5,7 @@ function Dice(props){
         backgroundColor: props.isHeld ? "#59E391" : "#ffffff"
     }
     return(
-        <div className="dice-container" style={styles}>
+        <div className="dice-container" style={styles} onClick={props.holdDice}>
             <h2 className="single-dice">{props.value}</h2>
         </div>
     )
