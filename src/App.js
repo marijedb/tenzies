@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Confetti from 'react-confetti'
 import Dice from './components/Dice';
+import { nanoid } from 'nanoid';
 
 function App() {
   const [windowSize, setWindowSize] = useState({
@@ -31,14 +32,18 @@ function App() {
     }   
   })
 
-  const allDice = diceArray.map((dice)=> {
-    return <Dice value={dice} />
+  const diceElements = diceArray.map((dice)=> {
+    return <Dice value={dice.value} key={dice.id} isHeld={dice.isHeld} />
   })
 
   function allNewDice(){
     let newDiceArray = []
     for(let i = 0; i < 10 ; i++){
-      newDiceArray.push(Math.floor(Math.random() * 6) + 1 )
+      newDiceArray.push({ 
+        value: Math.floor(Math.random() * 6) + 1, 
+        isHeld: false,
+        id: nanoid()
+      })
   }
   return newDiceArray
 }
@@ -49,11 +54,12 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Tenzies</h1>
+      <h1 className='app-title'>Tenzies</h1>
+      <p className='app-description'>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
       <div className='all-dice-container'>
-        {allDice}
+        {diceElements}
       </div>
-      <button onClick={getNewDice}>New Dice</button>
+      <button className='roll-btn' onClick={getNewDice}>Roll</button>
       {showConfetti && <Confetti width={windowSize.width} height={windowSize.height} />}
         <button onClick={handleConfetti}>Confetti!!!!</button>
     </div>
@@ -61,8 +67,3 @@ function App() {
 }
 
 export default App;
-
-// prop to dice, random number
-// loop 10 times to show 10 dice. give each dice the random number as prop
-// display on screen
-// when button clicked new random dice come. 

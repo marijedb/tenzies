@@ -13,10 +13,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   background-color: #F5F5F5;
-  height: 90vh;
+  min-height: 90vh;
   width: 85vw;
   border-radius: 6px;
+}
+
+.app-title {
+  margin: 0;
+}
+
+.app-description {
+  text-align: center;
+  max-width: 70%;
 }
 
 .all-dice-container {
@@ -30,7 +40,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
   border-radius: 4px;
   height: 35px;
   width: 35px;
@@ -40,6 +49,19 @@ body {
 
 .single-dice {
   font-size: 2rem;
+}
+
+.roll-btn {
+  background-color: #5035FF;
+  font-family: inherit;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0px 3px 8px #0000002e;
+  border: none;
+  border-radius: 4px;
+  padding: .7em 1.7em;
+  margin-top: 2em;
+  cursor: pointer;
 }
 
 @media (max-width: 320px){
@@ -52,7 +74,7 @@ body {
 @media (min-width: 600px){
   .app {
     max-width: 1000px;
-    max-height: 800px;
+    /* max-height: 800px; */
   }
 
   .dice-container {
@@ -66,6 +88,14 @@ body {
 }
 
 @media (min-width: 1000px){
+  .app {
+    /* min-height: 450px; */
+    overflow: hidden;
+  }
+
+  .app-title {
+    font-size: 3.5rem;
+  }
   .dice-container {
     height: 80px;
     width: 80px;
@@ -73,5 +103,9 @@ body {
 
   .single-dice {
     font-size: 4rem;
+  }
+
+  .roll-btn {
+    font-size: 1.5rem;
   }
 }
