@@ -1,9 +1,9 @@
 import React from "react";
 
-function Dice(){
+function Dice(props){
     return(
         <div className="dice-container">
-            <h2 className="single-dice">6</h2>
+            <h2 className="single-dice">{props.value}</h2>
         </div>
     )
 }

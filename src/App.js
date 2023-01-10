@@ -11,6 +11,8 @@ function App() {
 
   const [showConfetti, setShowConfetti] = useState(false)
     
+  const [diceArray, setDiceArray] = useState(allNewDice())
+
   function handleConfetti(){
     setShowConfetti(prevShow => !prevShow)
   }
@@ -29,21 +31,29 @@ function App() {
     }   
   })
 
+  const allDice = diceArray.map((dice)=> {
+    return <Dice value={dice} />
+  })
+
+  function allNewDice(){
+    let newDiceArray = []
+    for(let i = 0; i < 10 ; i++){
+      newDiceArray.push(Math.floor(Math.random() * 6) + 1 )
+  }
+  return newDiceArray
+}
+
+  function getNewDice(){
+    setDiceArray(allNewDice())
+  }
+
   return (
     <div className="app">
       <h1>Tenzies</h1>
       <div className='all-dice-container'>
-        <Dice />
-        <Dice />
-        <Dice />
-        <Dice />
-        <Dice />
-        <Dice />
-        <Dice />
-        <Dice />
-        <Dice />
-        <Dice />
+        {allDice}
       </div>
+      <button onClick={getNewDice}>New Dice</button>
       {showConfetti && <Confetti width={windowSize.width} height={windowSize.height} />}
         <button onClick={handleConfetti}>Confetti!!!!</button>
     </div>
