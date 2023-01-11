@@ -1,19 +1,19 @@
 import React from "react";
 
-function Score(){
+function Score(props){
     return(
         <div className="score">
             <div>
                 <p>Current Score:</p>
                 <div className="score--board">
-                    <p>1 Roll</p>
+                    <p>{props.currentScore} {props.currentScore === 1 ? "Roll" : "Rolls"}</p>
                 </div>
             </div>
 
             <div>
                 <p>High Score:</p>
                 <div className="score--board">
-                    <p>12 Rolls!</p>
+                    <p>{props.highScore} Rolls</p>
                 </div>
             </div>
         </div>

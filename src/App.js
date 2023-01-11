@@ -14,6 +14,9 @@ function App() {
   const [diceArray, setDiceArray] = useState(allNewDice())
 
   const [tenzies, setTenzies] = useState(false)
+
+  const [highScore, setHighScore] = useState(0)
+  const [currentScore, setCurrentScore] = useState(1)
   
   useEffect(()=> {
     function handleWindowSize(){
@@ -62,6 +65,7 @@ function App() {
     setDiceArray(oldDiceArray => oldDiceArray.map(dice => {
       return dice.isHeld ? dice : generateNewDice()
     }))
+    setCurrentScore(prevScore => prevScore + 1)
   }
 
   function holdDice(id){
@@ -77,12 +81,15 @@ function App() {
   function startNewGame(){
     setDiceArray(allNewDice())
     setTenzies(false)
+    setCurrentScore(1)
   }
+
+
   return (
     <div className="app">
       <h1 className='app-title'>Tenzies</h1>
       <p className='app-description'>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
-      <Score />
+      <Score currentScore={currentScore} highScore={highScore}/>
       <div className='all-dice-container'>
         {diceElements}
       </div>
