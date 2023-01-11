@@ -15,7 +15,7 @@ function App() {
 
   const [tenzies, setTenzies] = useState(false)
 
-  const [highScore, setHighScore] = useState(0)
+  const [highScore, setHighScore] = useState(() => JSON.parse(localStorage.getItem('highScore')) || 0)
   const [currentScore, setCurrentScore] = useState(1)
   
   useEffect(()=> {
@@ -40,6 +40,20 @@ function App() {
       setTenzies(true)
     }
   }, [diceArray])
+
+  useEffect(()=> {
+    if(tenzies) {
+      setHighScore(prevHighScore => {
+        if(currentScore < prevHighScore || prevHighScore === 0){
+          localStorage.setItem("highScore", JSON.stringify(currentScore))
+          return currentScore
+        } else {
+          localStorage.setItem("highScore", JSON.stringify(prevHighScore))
+          return prevHighScore
+        }
+      })
+    }
+  },[tenzies, currentScore])
 
   const diceElements = diceArray.map((dice)=> {
     return <Dice value={dice.value} key={dice.id} isHeld={dice.isHeld} holdDice={() => holdDice(dice.id)} />
