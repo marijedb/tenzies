@@ -9,8 +9,6 @@ function App() {
     width: window.innerWidth,
     height: window.innerHeight
   })
-
-  const [showConfetti, setShowConfetti] = useState(true)
     
   const [diceArray, setDiceArray] = useState(allNewDice())
 
@@ -75,6 +73,10 @@ function App() {
    }))
   }
 
+  function startNewGame(){
+    setDiceArray(allNewDice())
+    setTenzies(false)
+  }
   return (
     <div className="app">
       <h1 className='app-title'>Tenzies</h1>
@@ -82,8 +84,11 @@ function App() {
       <div className='all-dice-container'>
         {diceElements}
       </div>
-      <button className='roll-btn' onClick={getNewDice}>Roll</button>
-      {(showConfetti && tenzies) && <Confetti width={windowSize.width} height={windowSize.height} />}
+      {tenzies ? 
+        <button className='roll-btn' onClick={startNewGame}>New Game</button> : 
+        <button className='roll-btn' onClick={getNewDice}>Roll</button>
+      }
+      {(tenzies) && <Confetti width={windowSize.width} height={windowSize.height} />}
         
     </div>
   );
