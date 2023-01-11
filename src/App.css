@@ -64,9 +64,49 @@ body {
   cursor: pointer;
 }
 
+.score {
+  display: flex;
+  gap: 2em;
+  text-align: center;
+}
+
+.score--board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 100px;
+  background-color: #dddddd;
+  border-radius: 4px;
+  text-align: center;
+  box-shadow: 0px 0px 2px #444444;
+  margin: .5em 0 1em;
+}
+
+.score--board p {
+  font-style: italic;
+}
+
+.score p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+
+
 @media (max-width: 320px){
   .all-dice-container {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .score {
+    flex-direction: column;
+    gap: .3em;
+  }
+
+  .score--board {
+    padding: 0;
+    height: 30px;
   }
 }
 
@@ -74,7 +114,6 @@ body {
 @media (min-width: 600px){
   .app {
     max-width: 1000px;
-    /* max-height: 800px; */
   }
 
   .dice-container {
@@ -89,7 +128,6 @@ body {
 
 @media (min-width: 1000px){
   .app {
-    /* min-height: 450px; */
     overflow: hidden;
   }
 
@@ -107,5 +145,13 @@ body {
 
   .roll-btn {
     font-size: 1.5rem;
+  }
+
+  .score--board {
+    width: 200px;
+  }
+
+  .score p {
+    font-size: 1.3rem;
   }
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Confetti from 'react-confetti'
 import Dice from './components/Dice';
+import Score from './components/Score';
 import { nanoid } from 'nanoid';
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
     <div className="app">
       <h1 className='app-title'>Tenzies</h1>
       <p className='app-description'>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+      <Score />
       <div className='all-dice-container'>
         {diceElements}
       </div>
